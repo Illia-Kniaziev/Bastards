@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="20037" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina6_1" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="20020"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="System colors in document resources" minToolsVersion="11.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="MainViewController" customModule="Bastards" customModuleProvider="target">
+            <connections>
+                <outlet property="activityIndicator" destination="goW-oF-Mrq" id="PYH-wV-X2u"/>
+                <outlet property="emptyMessageLabel" destination="Q6h-vr-KBc" id="YIV-ud-Pif"/>
+                <outlet property="tableView" destination="pCY-Ve-HTq" id="9Jo-7d-fsA"/>
+                <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
+            </connections>
+        </placeholder>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view clearsContextBeforeDrawing="NO" contentMode="scaleToFill" id="i5M-Pr-FkT">
+            <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="pCY-Ve-HTq">
+                    <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                    <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                </tableView>
+                <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" style="large" translatesAutoresizingMaskIntoConstraints="NO" id="goW-oF-Mrq">
+                    <rect key="frame" x="188.5" y="429.5" width="37" height="37"/>
+                </activityIndicatorView>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Помилка завантаження 😢" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="Q6h-vr-KBc">
+                    <rect key="frame" x="96.5" y="437.5" width="221" height="21"/>
+                    <fontDescription key="fontDescription" type="system" weight="medium" pointSize="17"/>
+                    <nil key="textColor"/>
+                    <nil key="highlightedColor"/>
+                </label>
+            </subviews>
+            <viewLayoutGuide key="safeArea" id="fnl-2z-Ty3"/>
+            <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+            <constraints>
+                <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="Q6h-vr-KBc" secondAttribute="trailing" constant="16" id="EIc-HF-dwY"/>
+                <constraint firstItem="pCY-Ve-HTq" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" id="Io4-7q-ckG"/>
+                <constraint firstItem="goW-oF-Mrq" firstAttribute="centerX" secondItem="i5M-Pr-FkT" secondAttribute="centerX" id="KXZ-ea-f2v"/>
+                <constraint firstItem="Q6h-vr-KBc" firstAttribute="centerX" secondItem="i5M-Pr-FkT" secondAttribute="centerX" id="Npd-0I-uZ0"/>
+                <constraint firstItem="pCY-Ve-HTq" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" id="Uot-Uc-hA9"/>
+                <constraint firstItem="Q6h-vr-KBc" firstAttribute="centerY" secondItem="i5M-Pr-FkT" secondAttribute="centerY" id="ahy-QM-9nF"/>
+                <constraint firstItem="Q6h-vr-KBc" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="fnl-2z-Ty3" secondAttribute="leading" constant="16" id="fgL-x2-ELM"/>
+                <constraint firstItem="goW-oF-Mrq" firstAttribute="centerY" secondItem="i5M-Pr-FkT" secondAttribute="centerY" id="tdi-GC-MTm"/>
+                <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="pCY-Ve-HTq" secondAttribute="trailing" id="uqA-E9-PFE"/>
+                <constraint firstAttribute="bottom" secondItem="pCY-Ve-HTq" secondAttribute="bottom" id="y4S-i5-L5I"/>
+            </constraints>
+            <point key="canvasLocation" x="137.68115942028987" y="73.660714285714278"/>
+        </view>
+    </objects>
+    <resources>
+        <systemColor name="systemBackgroundColor">
+            <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+        </systemColor>
+    </resources>
+</document>
