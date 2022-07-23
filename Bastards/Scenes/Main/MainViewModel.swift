@@ -129,7 +129,15 @@ final class MainViewModel {
     private func prepareDayInfo(forDay day: Int, userLossesLookupTable lossesLookupTable: [Int : DayLosses]) -> DayInfo? {
         guard let todayLosses = lossesLookupTable[day] else { return nil }
         
-        let dateString = dateFormatter.string(from: todayLosses.date)
+        let dateString: String = {
+            if Calendar.current.isDateInToday(todayLosses.date) {
+                return "today"
+            } else if Calendar.current.isDateInYesterday(todayLosses.date) {
+                return "yesterday"
+            }
+            
+            return dateFormatter.string(from: todayLosses.date)
+        }()
         
         if let previousLosses = lossesLookupTable[day - 1] {
             let trucks = getDailyIncrease(basedOnToday: todayLosses.equipment.vehiclesAndFuelTanks,
