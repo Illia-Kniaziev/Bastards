@@ -12,7 +12,7 @@ final class DetailedViewModel {
     
     @Published var lossModels = [LossModel]()
     
-    private let dayInfo: DayInfo
+    let dayInfo: DayInfo
     private let router: DetailedRouter
     
     init(dayInfo: DayInfo, router: DetailedRouter) {

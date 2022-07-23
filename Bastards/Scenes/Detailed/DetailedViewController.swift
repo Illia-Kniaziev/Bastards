@@ -33,6 +33,7 @@ final class DetailedViewController: ViewController {
     }
     
     override func configureUI() {
+        title = viewModel.dayInfo.dateString
         tableView.dataSource = dataSource
         tableView.register(UINib(nibName: "LossCell", bundle: nil), forCellReuseIdentifier: "Cell")
     }
