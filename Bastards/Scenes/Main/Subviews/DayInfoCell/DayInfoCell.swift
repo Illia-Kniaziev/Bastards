@@ -34,6 +34,9 @@ class DayInfoCell: UITableViewCell {
         
         if let hottestDirection = model.hottestDirection {
             hottestDirectionLabel.text = hottestDirection + "🔥"
+        } else {
+            //to avoid incorrect data after reuse
+            hottestDirectionLabel.text = nil
         }
         
         infoStack.forEach {

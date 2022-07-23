@@ -49,7 +49,7 @@ final class MainViewController: ViewController {
         tableView.dataSource = dataSource
         tableView.register(UINib(nibName: DayInfoCell.identifier, bundle: nil), forCellReuseIdentifier: DayInfoCell.identifier)
         
-        title = "Bastards"
+        title = "The war"
         navigationController?.navigationBar.prefersLargeTitles = true
         
         configureMenu(withSelectedStrategy: .descending)
@@ -123,7 +123,6 @@ final class MainViewController: ViewController {
 
     //MARK: - menu
     private func configureMenu(withSelectedStrategy strategy: MainViewModel.SortingStrategy) {
-        //For some reason autolayout goes wild when the menu is set :(
         let actions = generateMenu(withSelectedStrategy: strategy)
         let menu = UIMenu(title: "Order", image: nil, identifier: nil, options: [], children: actions)
         navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Order", image: nil, primaryAction: nil, menu: menu)
