@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct DayInfo {
+struct DayInfo: Hashable {
     
     let day: Int
     let dateString: String
@@ -16,5 +16,13 @@ struct DayInfo {
     let tanks: Int
     let trucks: Int
     let planes: Int
+    let helicopter: Int
+    let fieldArtillery: Int
+    let mrl: Int
+    let drone: Int
+    let navalShip: Int
+    let antiAircraftWarfare: Int
+    let specialEquipment: Int?
+    let cruiseMissiles: Int?
     
 }

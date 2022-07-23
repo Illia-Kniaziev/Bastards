@@ -19,6 +19,9 @@ final class MainViewController: ViewController {
     private let viewModel: MainViewModel
     private var subscriptions = Set<AnyCancellable>()
     private lazy var dataSource = prepareDataSource()
+    private lazy var milestoneHeaderView: MilestoneView = {
+        return Bundle.main.loadNibNamed("MilestoneView", owner: nil)?.first as! MilestoneView
+    }()
     
     //MARK: - init
     init(viewModel: MainViewModel) {
@@ -41,6 +44,7 @@ final class MainViewController: ViewController {
         activityIndicator.isHidden = true
         emptyMessageLabel.isHidden = true
         
+        tableView.delegate = self
         tableView.dataSource = dataSource
         tableView.register(UINib(nibName: DayInfoCell.identifier, bundle: nil), forCellReuseIdentifier: DayInfoCell.identifier)
         
@@ -67,30 +71,68 @@ final class MainViewController: ViewController {
             .store(in: &subscriptions)
             
         
-        viewModel.$losses
+        viewModel.$lossesInfo
             .receive(on: RunLoop.main)
-            .sink { [weak self] losses in
-                var snapshot = NSDiffableDataSourceSnapshot<Int, DayLosses>()
+            .sink { [weak self] lossesInfo in
+                var snapshot = NSDiffableDataSourceSnapshot<Int, DayInfo>()
                 snapshot.appendSections([0])
-                snapshot.appendItems(losses, toSection: 0)
+                snapshot.appendItems(lossesInfo, toSection: 0)
                 self?.dataSource.apply(snapshot)
+            }
+            .store(in: &subscriptions)
+        
+        viewModel.$currentLoss
+            .receive(on: RunLoop.main)
+            .sink { [weak self] amount in
+                guard let self = self else { return }
+                self.milestoneHeaderView.currentAmountLabel.text = "There are \(amount) good russians"
+            }
+            .store(in: &subscriptions)
+        
+        viewModel.$lossBounds
+            .receive(on: RunLoop.main)
+            .sink { [weak self] bounds in
+                guard let self = self, let bounds = bounds else { return }
+                self.milestoneHeaderView.lowerBoundLabel.text = "\(bounds.0)"
+                self.milestoneHeaderView.upperBoundLabel.text = "\(bounds.1)"
+            }
+            .store(in: &subscriptions)
+        
+        viewModel.$progress
+            .receive(on: RunLoop.main)
+            .sink { [weak self] progress in
+                guard let self = self else { return }
+                self.milestoneHeaderView.progressBar.progress = progress
             }
             .store(in: &subscriptions)
         
     }
     
     //MARK: - data source configuration
-    private func prepareDataSource() -> UITableViewDiffableDataSource<Int, DayLosses> {
-        return UITableViewDiffableDataSource(tableView: tableView) { [weak self] tableView, indexPath, losses in
-            let cell = tableView.dequeueReusableCell(withIdentifier: DayInfoCell.identifier) as! DayInfoCell
-            
-            if let config = self?.viewModel.prepareDayInfo(forDay: losses.day) {
-                cell.configure(withModel: config)
-                return cell
-            }
-            
-            return nil
+    private func prepareDataSource() -> UITableViewDiffableDataSource<Int, DayInfo> {
+        return UITableViewDiffableDataSource(tableView: tableView) { tableView, indexPath, lossesInfo in
+            let cell = tableView.dequeueReusableCell(withIdentifier: DayInfoCell.identifier, for: indexPath) as! DayInfoCell
+            cell.configure(withModel: lossesInfo)
+            cell.accessoryType = .disclosureIndicator
+            return cell
         }
     }
 
+}
+
+extension MainViewController: UITableViewDelegate {
+    
+    func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
+        milestoneHeaderView
+    }
+    
+    func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
+        250
+    }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        tableView.deselectRow(at: indexPath, animated: true)
+        viewModel.openDetails(forIndex: indexPath.row)
+    }
+    
 }

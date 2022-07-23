@@ -15,7 +15,8 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         guard let windowScene = (scene as? UIWindowScene) else { return }
         let window = UIWindow(windowScene: windowScene)
         let navigator = Navigator()
-        let router = MainRouter(navigator: navigator, window: window)
+        let service = NetworkingService()
+        let router = MainRouter(navigator: navigator, window: window, networkingService: service)
         router.toSelf()
     }
     

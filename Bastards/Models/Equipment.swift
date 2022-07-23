@@ -82,7 +82,7 @@ struct Equipment: Decodable, Hashable {
             day = 0
         }
         
-        //let's generalize interchangable fields
+        //generalize interchangeable fields
         if let vehiclesAndFuelTanks = try? values.decode(Int.self, forKey: .vehiclesAndFuelTanks) {
             self.vehiclesAndFuelTanks = vehiclesAndFuelTanks
         } else if let militaryAuto = try? values.decode(Int.self, forKey: .militaryAuto),

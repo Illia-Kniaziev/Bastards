@@ -39,6 +39,11 @@
 		068BEAFF288C3DDD0060889D /* EquipmentRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 068BEAFE288C3DDD0060889D /* EquipmentRequest.swift */; };
 		068BEB01288C3E1E0060889D /* APIPath.swift in Sources */ = {isa = PBXBuildFile; fileRef = 068BEB00288C3E1E0060889D /* APIPath.swift */; };
 		068BEB04288C3EA80060889D /* PersonnelRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 068BEB03288C3EA80060889D /* PersonnelRequest.swift */; };
+		068BEB06288C47D80060889D /* LossModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 068BEB05288C47D80060889D /* LossModel.swift */; };
+		068BEB0B288C5C950060889D /* LossCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 068BEB09288C5C950060889D /* LossCell.swift */; };
+		068BEB0C288C5C950060889D /* LossCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 068BEB0A288C5C950060889D /* LossCell.xib */; };
+		068BEB0E288C617A0060889D /* MilestoneView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 068BEB0D288C617A0060889D /* MilestoneView.xib */; };
+		068BEB11288C655A0060889D /* MilestoneView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 068BEB10288C655A0060889D /* MilestoneView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -76,6 +81,11 @@
 		068BEAFE288C3DDD0060889D /* EquipmentRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EquipmentRequest.swift; sourceTree = "<group>"; };
 		068BEB00288C3E1E0060889D /* APIPath.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIPath.swift; sourceTree = "<group>"; };
 		068BEB03288C3EA80060889D /* PersonnelRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PersonnelRequest.swift; sourceTree = "<group>"; };
+		068BEB05288C47D80060889D /* LossModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LossModel.swift; sourceTree = "<group>"; };
+		068BEB09288C5C950060889D /* LossCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LossCell.swift; sourceTree = "<group>"; };
+		068BEB0A288C5C950060889D /* LossCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = LossCell.xib; sourceTree = "<group>"; };
+		068BEB0D288C617A0060889D /* MilestoneView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = MilestoneView.xib; sourceTree = "<group>"; };
+		068BEB10288C655A0060889D /* MilestoneView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MilestoneView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -133,6 +143,7 @@
 		068BEAB6288B26570060889D /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				068BEAC8288B2BC90060889D /* LocalJSONPaths.swift */,
 				068BEAC1288B28C20060889D /* russia_losses_equipment.json */,
 				068BEAC2288B28C20060889D /* russia_losses_personnel.json */,
 				068BEAAA288B26000060889D /* Assets.xcassets */,
@@ -174,7 +185,6 @@
 			isa = PBXGroup;
 			children = (
 				068BEAEB288C2C2A0060889D /* InApp */,
-				068BEAC8288B2BC90060889D /* LocalJSONPaths.swift */,
 				068BEAD2288B44A80060889D /* Equipment.swift */,
 				068BEAD8288C1E1E0060889D /* Personnel.swift */,
 				068BEADA288C243F0060889D /* DayLosses.swift */,
@@ -202,10 +212,11 @@
 		068BEADC288C25E70060889D /* Detailed */ = {
 			isa = PBXGroup;
 			children = (
-				068BEADD288C25FE0060889D /* DetailedViewController.swift */,
+				068BEB07288C5C7C0060889D /* Subviews */,
 				068BEAE1288C260A0060889D /* DetailedViewModel.swift */,
-				068BEAE3288C26170060889D /* DetailedRouter.swift */,
+				068BEADD288C25FE0060889D /* DetailedViewController.swift */,
 				068BEADE288C25FE0060889D /* DetailedViewController.xib */,
+				068BEAE3288C26170060889D /* DetailedRouter.swift */,
 			);
 			path = Detailed;
 			sourceTree = "<group>";
@@ -213,6 +224,7 @@
 		068BEAE5288C27630060889D /* Subviews */ = {
 			isa = PBXGroup;
 			children = (
+				068BEB0F288C654B0060889D /* Milestone */,
 				068BEAE6288C27760060889D /* DayInfoCell */,
 			);
 			path = Subviews;
@@ -231,6 +243,7 @@
 			isa = PBXGroup;
 			children = (
 				068BEAEC288C2C4B0060889D /* DayInfoModel.swift */,
+				068BEB05288C47D80060889D /* LossModel.swift */,
 			);
 			path = InApp;
 			sourceTree = "<group>";
@@ -271,6 +284,32 @@
 				068BEB03288C3EA80060889D /* PersonnelRequest.swift */,
 			);
 			path = APIRequests;
+			sourceTree = "<group>";
+		};
+		068BEB07288C5C7C0060889D /* Subviews */ = {
+			isa = PBXGroup;
+			children = (
+				068BEB08288C5C800060889D /* LossCell */,
+			);
+			path = Subviews;
+			sourceTree = "<group>";
+		};
+		068BEB08288C5C800060889D /* LossCell */ = {
+			isa = PBXGroup;
+			children = (
+				068BEB09288C5C950060889D /* LossCell.swift */,
+				068BEB0A288C5C950060889D /* LossCell.xib */,
+			);
+			path = LossCell;
+			sourceTree = "<group>";
+		};
+		068BEB0F288C654B0060889D /* Milestone */ = {
+			isa = PBXGroup;
+			children = (
+				068BEB0D288C617A0060889D /* MilestoneView.xib */,
+				068BEB10288C655A0060889D /* MilestoneView.swift */,
+			);
+			path = Milestone;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -332,11 +371,13 @@
 			buildActionMask = 2147483647;
 			files = (
 				068BEAAE288B26000060889D /* LaunchScreen.storyboard in Resources */,
+				068BEB0E288C617A0060889D /* MilestoneView.xib in Resources */,
 				068BEABC288B26E80060889D /* MainViewController.xib in Resources */,
 				068BEAE0288C25FE0060889D /* DetailedViewController.xib in Resources */,
 				068BEAC3288B28C20060889D /* russia_losses_equipment.json in Resources */,
 				068BEAC4288B28C20060889D /* russia_losses_personnel.json in Resources */,
 				068BEAEA288C27940060889D /* DayInfoCell.xib in Resources */,
+				068BEB0C288C5C950060889D /* LossCell.xib in Resources */,
 				068BEAAB288B26000060889D /* Assets.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -352,6 +393,8 @@
 				068BEADF288C25FE0060889D /* DetailedViewController.swift in Sources */,
 				068BEAE9288C27940060889D /* DayInfoCell.swift in Sources */,
 				068BEAF3288C395E0060889D /* NetworkingServiceProtocol.swift in Sources */,
+				068BEB06288C47D80060889D /* LossModel.swift in Sources */,
+				068BEB11288C655A0060889D /* MilestoneView.swift in Sources */,
 				068BEABB288B26E80060889D /* MainViewController.swift in Sources */,
 				068BEACF288B31300060889D /* MainRouter.swift in Sources */,
 				068BEAD1288B32140060889D /* Navigator.swift in Sources */,
@@ -367,6 +410,7 @@
 				068BEAE4288C26170060889D /* DetailedRouter.swift in Sources */,
 				068BEAF7288C3AD70060889D /* NetworkingRequest.swift in Sources */,
 				068BEAF9288C3AFD0060889D /* DecodableRequest.swift in Sources */,
+				068BEB0B288C5C950060889D /* LossCell.swift in Sources */,
 				068BEAA4288B25FD0060889D /* SceneDelegate.swift in Sources */,
 				068BEAC9288B2BC90060889D /* LocalJSONPaths.swift in Sources */,
 				068BEAFC288C3B670060889D /* NetworkingService.swift in Sources */,

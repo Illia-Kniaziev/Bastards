@@ -19,12 +19,17 @@ final class MainViewModel {
     
     //MARK: - published properties
     @Published var state: FetchingState = .initial
-    @Published var losses: [DayLosses] = []
+    @Published var lossesInfo: [DayInfo] = []
+    
+    @Published var lossBounds: (Int, Int)? = nil
+    @Published var currentLoss: Int = 0
+    @Published var progress: Float = 0
     
     //MARK: - private properties
-    private var lossesLookupTable = [Int : DayLosses]()
-    private var subscriptions = Set<AnyCancellable>()
+    private let lossStep = 5000.0
     private let router: MainRouter
+    private let networkingService: NetworkingServiceProtocol
+    private var subscriptions = Set<AnyCancellable>()
     
     private lazy var decoder: JSONDecoder = {
         let decoder = JSONDecoder()
@@ -41,8 +46,9 @@ final class MainViewModel {
     }()
     
     //MARK: - init
-    init(router: MainRouter) {
+    init(router: MainRouter, networkingService: NetworkingServiceProtocol) {
         self.router = router
+        self.networkingService = networkingService
     }
     
     //MARK: - public methods
@@ -64,46 +70,9 @@ final class MainViewModel {
         
     }
     
-    ///creates day losses increase model
-    func prepareDayInfo(forDay day: Int) -> DayInfo? {
-        guard let todayLosses = lossesLookupTable[day] else { return nil }
-        
-        let dateString = dateFormatter.string(from: todayLosses.date)
-        
-        if let previousLosses = lossesLookupTable[day - 1] {
-            let trucks: Int = {
-                if let todayVehiclesAndFuelTanks = todayLosses.equipment.vehiclesAndFuelTanks {
-                    if let prevVehiclesAndFuelTanks = previousLosses.equipment.vehiclesAndFuelTanks {
-                        return todayVehiclesAndFuelTanks - prevVehiclesAndFuelTanks
-                    }
-                    
-                    return todayVehiclesAndFuelTanks
-                }
-                
-                return 0
-            }()
-            
-            return DayInfo(
-                day: day,
-                dateString: dateString,
-                hottestDirection: todayLosses.equipment.greatestLossesDirection,
-                eliminated: todayLosses.personnel.personnel - previousLosses.personnel.personnel,
-                tanks: todayLosses.equipment.tank - previousLosses.equipment.tank,
-                trucks: trucks,
-                planes: todayLosses.equipment.aircraft - previousLosses.equipment.aircraft
-            )
-        } else {
-            return DayInfo(
-                day: day,
-                dateString: dateString,
-                hottestDirection: todayLosses.equipment.greatestLossesDirection,
-                eliminated: todayLosses.personnel.personnel,
-                tanks: todayLosses.equipment.tank,
-                trucks: todayLosses.equipment.vehiclesAndFuelTanks ?? 0,
-                planes: todayLosses.equipment.aircraft
-            )
-        }
-        
+    func openDetails(forIndex index: Int) {
+        let model = lossesInfo[index]
+        router.toDetails(usingDayInfo: model)
     }
     
     //MARK: - private methods
@@ -129,7 +98,7 @@ final class MainViewModel {
             dict[personnel.day] = personnel
         }
         
-        self.losses = eq
+        let losses: [DayLosses] = eq
             .compactMap { equipment in
                 if let personnel = personnelLookupTable[equipment.day] {
                     return DayLosses(day: equipment.day, date: equipment.date, equipment: equipment, personnel: personnel)
@@ -137,15 +106,92 @@ final class MainViewModel {
                 
                 return nil
             }
-            .sorted { rhs, lhs in
-                rhs.day < rhs.day
-            }
         
-        self.state = .succeded
-        
-        self.lossesLookupTable = self.losses.reduce(into: [Int : DayLosses]()) { dict, info in
+        let lossesLookupTable = losses.reduce(into: [Int : DayLosses]()) { dict, info in
             dict[info.day] = info
         }
+        
+        self.lossesInfo = losses
+            .compactMap { self.prepareDayInfo(forDay: $0.day, userLossesLookupTable: lossesLookupTable) }
+            .sorted { lhs, rhs in
+                lhs.day > rhs.day
+            }
+        
+        if let amount = personnel.last?.personnel {
+            self.processLosses(forAmount: amount)
+        }
+        
+        self.state = .succeded
+    }
+    
+    //MARK: - daily stats
+    ///creates day losses model
+    private func prepareDayInfo(forDay day: Int, userLossesLookupTable lossesLookupTable: [Int : DayLosses]) -> DayInfo? {
+        guard let todayLosses = lossesLookupTable[day] else { return nil }
+        
+        let dateString = dateFormatter.string(from: todayLosses.date)
+        
+        if let previousLosses = lossesLookupTable[day - 1] {
+            let trucks = getDailyIncrease(basedOnToday: todayLosses.equipment.vehiclesAndFuelTanks,
+                                          yesterday: previousLosses.equipment.vehiclesAndFuelTanks)
+            let specialEquipment = getDailyIncrease(basedOnToday: todayLosses.equipment.specialEquipment,
+                                                    yesterday: previousLosses.equipment.specialEquipment)
+            let cruiseMissiles = getDailyIncrease(basedOnToday: todayLosses.equipment.cruiseMissiles,
+                                                  yesterday: previousLosses.equipment.cruiseMissiles)
+            return DayInfo(
+                day: day,
+                dateString: dateString,
+                hottestDirection: todayLosses.equipment.greatestLossesDirection,
+                eliminated: todayLosses.personnel.personnel - previousLosses.personnel.personnel,
+                tanks: todayLosses.equipment.tank - previousLosses.equipment.tank,
+                trucks: trucks ?? 0,
+                planes: todayLosses.equipment.aircraft - previousLosses.equipment.aircraft,
+                helicopter: todayLosses.equipment.helicopter - previousLosses.equipment.helicopter,
+                fieldArtillery: todayLosses.equipment.fieldArtillery - previousLosses.equipment.fieldArtillery,
+                mrl: todayLosses.equipment.mrl - previousLosses.equipment.mrl,
+                drone: todayLosses.equipment.drone - previousLosses.equipment.drone,
+                navalShip: todayLosses.equipment.navalShip - previousLosses.equipment.navalShip,
+                antiAircraftWarfare: todayLosses.equipment.antiAircraftWarfare - previousLosses.equipment.antiAircraftWarfare,
+                specialEquipment: specialEquipment,
+                cruiseMissiles: cruiseMissiles
+            )
+        }
+        return DayInfo(
+            day: day,
+            dateString: dateString,
+            hottestDirection: todayLosses.equipment.greatestLossesDirection,
+            eliminated: todayLosses.personnel.personnel,
+            tanks: todayLosses.equipment.tank,
+            trucks: todayLosses.equipment.vehiclesAndFuelTanks ?? 0,
+            planes: todayLosses.equipment.aircraft,
+            helicopter: todayLosses.equipment.helicopter,
+            fieldArtillery: todayLosses.equipment.fieldArtillery,
+            mrl: todayLosses.equipment.mrl,
+            drone: todayLosses.equipment.drone,
+            navalShip: todayLosses.equipment.navalShip,
+            antiAircraftWarfare: todayLosses.equipment.antiAircraftWarfare,
+            specialEquipment: todayLosses.equipment.specialEquipment,
+            cruiseMissiles: todayLosses.equipment.cruiseMissiles
+        )
+        
+    }
+    
+    private func getDailyIncrease(basedOnToday today: Int?, yesterday: Int?) -> Int? {
+        if let today = today {
+            if let yesterday = yesterday {
+                return today - yesterday
+            }
+            return today
+        }
+        return nil
+    }
+    
+    private func processLosses(forAmount amount: Int) {
+        currentLoss = amount
+        let lowerBound = floor(Double(currentLoss) / lossStep) * lossStep
+        let upperBound = lowerBound + lossStep
+        lossBounds = (Int(lowerBound), Int(upperBound))
+        progress = Float((Double(currentLoss) - lowerBound) / lossStep)
     }
     
 }

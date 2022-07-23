@@ -10,17 +10,17 @@ import Foundation
 final class DetailedRouter: Router {
     
     var navigator: Navigator
-    var previousLosses: DayLosses
-    var losses: DayLosses
+    var dayInfo: DayInfo
     
-    init(navigator: Navigator, losses: DayLosses, previousLosses: DayLosses) {
+    init(dayInfo: DayInfo, navigator: Navigator) {
         self.navigator = navigator
-        self.previousLosses = previousLosses
-        self.losses = losses
+        self.dayInfo = dayInfo
     }
     
     func toSelf() {
-        
+        let viewModel = DetailedViewModel(dayInfo: dayInfo, router: self)
+        let controller = DetailedViewController(viewModel: viewModel)
+        navigator.navigate(withNavigation: .push, controller: controller, animated: true)
     }
     
 }
