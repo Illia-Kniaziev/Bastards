@@ -23,6 +23,8 @@
 		068BEAD1288B32140060889D /* Navigator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 068BEAD0288B32140060889D /* Navigator.swift */; };
 		068BEAD3288B44A80060889D /* Equipment.swift in Sources */ = {isa = PBXBuildFile; fileRef = 068BEAD2288B44A80060889D /* Equipment.swift */; };
 		068BEAD6288B4DAF0060889D /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 068BEAD5288B4DAF0060889D /* ViewController.swift */; };
+		068BEAD9288C1E1E0060889D /* Personnel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 068BEAD8288C1E1E0060889D /* Personnel.swift */; };
+		068BEADB288C243F0060889D /* DayLosses.swift in Sources */ = {isa = PBXBuildFile; fileRef = 068BEADA288C243F0060889D /* DayLosses.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -44,6 +46,8 @@
 		068BEAD0288B32140060889D /* Navigator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Navigator.swift; sourceTree = "<group>"; };
 		068BEAD2288B44A80060889D /* Equipment.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Equipment.swift; sourceTree = "<group>"; };
 		068BEAD5288B4DAF0060889D /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
+		068BEAD8288C1E1E0060889D /* Personnel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Personnel.swift; sourceTree = "<group>"; };
+		068BEADA288C243F0060889D /* DayLosses.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DayLosses.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -140,6 +144,8 @@
 			children = (
 				068BEAC8288B2BC90060889D /* LocalJSONPaths.swift */,
 				068BEAD2288B44A80060889D /* Equipment.swift */,
+				068BEAD8288C1E1E0060889D /* Personnel.swift */,
+				068BEADA288C243F0060889D /* DayLosses.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -239,9 +245,11 @@
 				068BEAD1288B32140060889D /* Navigator.swift in Sources */,
 				068BEAC7288B298D0060889D /* JSONReader.swift in Sources */,
 				068BEAD6288B4DAF0060889D /* ViewController.swift in Sources */,
+				068BEADB288C243F0060889D /* DayLosses.swift in Sources */,
 				068BEAD3288B44A80060889D /* Equipment.swift in Sources */,
 				068BEAA2288B25FD0060889D /* AppDelegate.swift in Sources */,
 				068BEACC288B30DD0060889D /* Router.swift in Sources */,
+				068BEAD9288C1E1E0060889D /* Personnel.swift in Sources */,
 				068BEAA4288B25FD0060889D /* SceneDelegate.swift in Sources */,
 				068BEAC9288B2BC90060889D /* LocalJSONPaths.swift in Sources */,
 				068BEABF288B27080060889D /* MainViewModel.swift in Sources */,

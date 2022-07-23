@@ -34,7 +34,7 @@ final class MainViewController: ViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        viewModel.fetchEquipment()
+        viewModel.fetchModels()
     }
     
     override func configureUI() {
@@ -43,6 +43,9 @@ final class MainViewController: ViewController {
         
         tableView.dataSource = dataSource
         tableView.register(UITableViewCell.self, forCellReuseIdentifier: "Cell")
+        
+        title = "Bastards"
+        navigationController?.navigationBar.prefersLargeTitles = true
     }
     
     override func bindViewModel() {
@@ -64,24 +67,26 @@ final class MainViewController: ViewController {
             .store(in: &subscriptions)
             
         
-        viewModel.$equipment
+        viewModel.$losses
             .receive(on: RunLoop.main)
-            .sink { [weak self] equipment in
-                var snapshot = NSDiffableDataSourceSnapshot<Int, Equipment>()
+            .sink { [weak self] losses in
+                var snapshot = NSDiffableDataSourceSnapshot<Int, DayLosses>()
                 snapshot.appendSections([0])
-                snapshot.appendItems(equipment, toSection: 0)
+                snapshot.appendItems(losses, toSection: 0)
                 self?.dataSource.apply(snapshot)
             }
             .store(in: &subscriptions)
         
     }
     
-    private func prepareDataSource() -> UITableViewDiffableDataSource<Int, Equipment> {
-        return UITableViewDiffableDataSource(tableView: tableView) { tableView, indexPath, equipment in
+    private func prepareDataSource() -> UITableViewDiffableDataSource<Int, DayLosses> {
+        return UITableViewDiffableDataSource(tableView: tableView) { tableView, indexPath, losses in
             let cell = tableView.dequeueReusableCell(withIdentifier: "Cell")
             var config = UIListContentConfiguration.subtitleCell()
-            config.text = equipment.greatestLossesDirection
-            config.secondaryText = "\(equipment.tank)"
+            config.text = "day #\(losses.day)"
+            if let greatestLosses = losses.equipment.greatestLossesDirection {
+                config.secondaryText = greatestLosses + "🔥"
+            }
             cell?.contentConfiguration = config
             cell?.accessoryType = .disclosureIndicator
             return cell

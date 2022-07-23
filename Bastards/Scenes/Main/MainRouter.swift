@@ -20,8 +20,9 @@ final class MainRouter: Router {
     
     func toSelf() {
         let viewModel = MainViewModel(router: self)
-        let controller = MainViewController(viewModel: viewModel)
-        navigator.navigate(withNavigation: .launch(window: window), controller: controller, animated: false)
+        let vc = MainViewController(viewModel: viewModel)
+        let nc = UINavigationController(rootViewController: vc)
+        navigator.navigate(withNavigation: .launch(window: window), controller: nc, animated: false)
     }
     
 }

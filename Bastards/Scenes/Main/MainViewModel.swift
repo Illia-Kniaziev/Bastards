@@ -18,7 +18,7 @@ final class MainViewModel {
     }
     
     @Published var state: FetchingState = .initial
-    @Published var equipment: [Equipment] = []
+    @Published var losses: [DayLosses] = []
     
     private let router: MainRouter
     
@@ -34,22 +34,41 @@ final class MainViewModel {
         self.router = router
     }
     
-    func fetchEquipment() {
+    func fetchModels() {
         state = .ongoing
         
         DispatchQueue.global(qos: .userInteractive).async { [weak self] in
             guard let self = self else { return }
             let reader = JSONReader()
-            if let structs: [Equipment] = reader.readJson(forResource: LocalJSONPaths.equipment.rawValue,
-                                                          usingDecoder: self.decoder) {
+            
+            if var eq: [Equipment] = reader.readJson(forResource: LocalJSONPaths.equipment.rawValue, usingDecoder: self.decoder),
+               let pers: [Personnel] = reader.readJson(forResource: LocalJSONPaths.personnel.rawValue, usingDecoder: self.decoder) {
                 // keeping in mind some uncertainty about the 'day' field we gotta get rid of corrupted documents
+                eq = eq.filter { $0.day != 0 }
+                
+                let personnelLookupTable = pers.reduce(into: [Int : Personnel]()) { dict, personnel in
+                    dict[personnel.day] = personnel
+                }
+                
+                self.losses = eq
+                    .compactMap { equipment in
+                        if let personnel = personnelLookupTable[equipment.day] {
+                            return DayLosses(day: equipment.day, equipment: equipment, personnel: personnel)
+                        }
+                        
+                        return nil
+                    }
+                    .sorted { rhs, lhs in
+                        rhs.day < rhs.day
+                    }
+                
                 self.state = .succeded
-                self.equipment = structs.filter { $0.day != 0 }
             } else {
                 self.state = .failed
             }
-            
         }
+        
+        
     }
     
 }
