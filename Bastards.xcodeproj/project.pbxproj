@@ -25,6 +25,20 @@
 		068BEAD6288B4DAF0060889D /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 068BEAD5288B4DAF0060889D /* ViewController.swift */; };
 		068BEAD9288C1E1E0060889D /* Personnel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 068BEAD8288C1E1E0060889D /* Personnel.swift */; };
 		068BEADB288C243F0060889D /* DayLosses.swift in Sources */ = {isa = PBXBuildFile; fileRef = 068BEADA288C243F0060889D /* DayLosses.swift */; };
+		068BEADF288C25FE0060889D /* DetailedViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 068BEADD288C25FE0060889D /* DetailedViewController.swift */; };
+		068BEAE0288C25FE0060889D /* DetailedViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 068BEADE288C25FE0060889D /* DetailedViewController.xib */; };
+		068BEAE2288C260A0060889D /* DetailedViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 068BEAE1288C260A0060889D /* DetailedViewModel.swift */; };
+		068BEAE4288C26170060889D /* DetailedRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 068BEAE3288C26170060889D /* DetailedRouter.swift */; };
+		068BEAE9288C27940060889D /* DayInfoCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 068BEAE7288C27930060889D /* DayInfoCell.swift */; };
+		068BEAEA288C27940060889D /* DayInfoCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 068BEAE8288C27930060889D /* DayInfoCell.xib */; };
+		068BEAED288C2C4B0060889D /* DayInfoModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 068BEAEC288C2C4B0060889D /* DayInfoModel.swift */; };
+		068BEAF3288C395E0060889D /* NetworkingServiceProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 068BEAF2288C395E0060889D /* NetworkingServiceProtocol.swift */; };
+		068BEAF7288C3AD70060889D /* NetworkingRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 068BEAF6288C3AD70060889D /* NetworkingRequest.swift */; };
+		068BEAF9288C3AFD0060889D /* DecodableRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 068BEAF8288C3AFD0060889D /* DecodableRequest.swift */; };
+		068BEAFC288C3B670060889D /* NetworkingService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 068BEAFB288C3B670060889D /* NetworkingService.swift */; };
+		068BEAFF288C3DDD0060889D /* EquipmentRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 068BEAFE288C3DDD0060889D /* EquipmentRequest.swift */; };
+		068BEB01288C3E1E0060889D /* APIPath.swift in Sources */ = {isa = PBXBuildFile; fileRef = 068BEB00288C3E1E0060889D /* APIPath.swift */; };
+		068BEB04288C3EA80060889D /* PersonnelRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 068BEB03288C3EA80060889D /* PersonnelRequest.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -48,6 +62,20 @@
 		068BEAD5288B4DAF0060889D /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
 		068BEAD8288C1E1E0060889D /* Personnel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Personnel.swift; sourceTree = "<group>"; };
 		068BEADA288C243F0060889D /* DayLosses.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DayLosses.swift; sourceTree = "<group>"; };
+		068BEADD288C25FE0060889D /* DetailedViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailedViewController.swift; sourceTree = "<group>"; };
+		068BEADE288C25FE0060889D /* DetailedViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = DetailedViewController.xib; sourceTree = "<group>"; };
+		068BEAE1288C260A0060889D /* DetailedViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailedViewModel.swift; sourceTree = "<group>"; };
+		068BEAE3288C26170060889D /* DetailedRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailedRouter.swift; sourceTree = "<group>"; };
+		068BEAE7288C27930060889D /* DayInfoCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DayInfoCell.swift; sourceTree = "<group>"; };
+		068BEAE8288C27930060889D /* DayInfoCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = DayInfoCell.xib; sourceTree = "<group>"; };
+		068BEAEC288C2C4B0060889D /* DayInfoModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DayInfoModel.swift; sourceTree = "<group>"; };
+		068BEAF2288C395E0060889D /* NetworkingServiceProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkingServiceProtocol.swift; sourceTree = "<group>"; };
+		068BEAF6288C3AD70060889D /* NetworkingRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkingRequest.swift; sourceTree = "<group>"; };
+		068BEAF8288C3AFD0060889D /* DecodableRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DecodableRequest.swift; sourceTree = "<group>"; };
+		068BEAFB288C3B670060889D /* NetworkingService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkingService.swift; sourceTree = "<group>"; };
+		068BEAFE288C3DDD0060889D /* EquipmentRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EquipmentRequest.swift; sourceTree = "<group>"; };
+		068BEB00288C3E1E0060889D /* APIPath.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIPath.swift; sourceTree = "<group>"; };
+		068BEB03288C3EA80060889D /* PersonnelRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PersonnelRequest.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -80,6 +108,7 @@
 		068BEAA0288B25FD0060889D /* Bastards */ = {
 			isa = PBXGroup;
 			children = (
+				068BEAF0288C39180060889D /* Networking */,
 				068BEAD4288B4DA40060889D /* Common */,
 				068BEAB5288B260C0060889D /* Application */,
 				068BEAC5288B29450060889D /* Models */,
@@ -115,6 +144,7 @@
 		068BEAB7288B26AB0060889D /* Scenes */ = {
 			isa = PBXGroup;
 			children = (
+				068BEADC288C25E70060889D /* Detailed */,
 				068BEAB8288B26D10060889D /* Main */,
 			);
 			path = Scenes;
@@ -123,6 +153,7 @@
 		068BEAB8288B26D10060889D /* Main */ = {
 			isa = PBXGroup;
 			children = (
+				068BEAE5288C27630060889D /* Subviews */,
 				068BEABE288B27080060889D /* MainViewModel.swift */,
 				068BEAB9288B26E80060889D /* MainViewController.swift */,
 				068BEABA288B26E80060889D /* MainViewController.xib */,
@@ -142,6 +173,7 @@
 		068BEAC5288B29450060889D /* Models */ = {
 			isa = PBXGroup;
 			children = (
+				068BEAEB288C2C2A0060889D /* InApp */,
 				068BEAC8288B2BC90060889D /* LocalJSONPaths.swift */,
 				068BEAD2288B44A80060889D /* Equipment.swift */,
 				068BEAD8288C1E1E0060889D /* Personnel.swift */,
@@ -165,6 +197,80 @@
 				068BEAD5288B4DAF0060889D /* ViewController.swift */,
 			);
 			path = Common;
+			sourceTree = "<group>";
+		};
+		068BEADC288C25E70060889D /* Detailed */ = {
+			isa = PBXGroup;
+			children = (
+				068BEADD288C25FE0060889D /* DetailedViewController.swift */,
+				068BEAE1288C260A0060889D /* DetailedViewModel.swift */,
+				068BEAE3288C26170060889D /* DetailedRouter.swift */,
+				068BEADE288C25FE0060889D /* DetailedViewController.xib */,
+			);
+			path = Detailed;
+			sourceTree = "<group>";
+		};
+		068BEAE5288C27630060889D /* Subviews */ = {
+			isa = PBXGroup;
+			children = (
+				068BEAE6288C27760060889D /* DayInfoCell */,
+			);
+			path = Subviews;
+			sourceTree = "<group>";
+		};
+		068BEAE6288C27760060889D /* DayInfoCell */ = {
+			isa = PBXGroup;
+			children = (
+				068BEAE7288C27930060889D /* DayInfoCell.swift */,
+				068BEAE8288C27930060889D /* DayInfoCell.xib */,
+			);
+			path = DayInfoCell;
+			sourceTree = "<group>";
+		};
+		068BEAEB288C2C2A0060889D /* InApp */ = {
+			isa = PBXGroup;
+			children = (
+				068BEAEC288C2C4B0060889D /* DayInfoModel.swift */,
+			);
+			path = InApp;
+			sourceTree = "<group>";
+		};
+		068BEAF0288C39180060889D /* Networking */ = {
+			isa = PBXGroup;
+			children = (
+				068BEAFD288C3DCE0060889D /* APIRequests */,
+				068BEAF5288C3AB30060889D /* Request */,
+				068BEAF4288C3AA90060889D /* Service */,
+				068BEB00288C3E1E0060889D /* APIPath.swift */,
+			);
+			path = Networking;
+			sourceTree = "<group>";
+		};
+		068BEAF4288C3AA90060889D /* Service */ = {
+			isa = PBXGroup;
+			children = (
+				068BEAF2288C395E0060889D /* NetworkingServiceProtocol.swift */,
+				068BEAFB288C3B670060889D /* NetworkingService.swift */,
+			);
+			path = Service;
+			sourceTree = "<group>";
+		};
+		068BEAF5288C3AB30060889D /* Request */ = {
+			isa = PBXGroup;
+			children = (
+				068BEAF6288C3AD70060889D /* NetworkingRequest.swift */,
+				068BEAF8288C3AFD0060889D /* DecodableRequest.swift */,
+			);
+			path = Request;
+			sourceTree = "<group>";
+		};
+		068BEAFD288C3DCE0060889D /* APIRequests */ = {
+			isa = PBXGroup;
+			children = (
+				068BEAFE288C3DDD0060889D /* EquipmentRequest.swift */,
+				068BEB03288C3EA80060889D /* PersonnelRequest.swift */,
+			);
+			path = APIRequests;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -227,8 +333,10 @@
 			files = (
 				068BEAAE288B26000060889D /* LaunchScreen.storyboard in Resources */,
 				068BEABC288B26E80060889D /* MainViewController.xib in Resources */,
+				068BEAE0288C25FE0060889D /* DetailedViewController.xib in Resources */,
 				068BEAC3288B28C20060889D /* russia_losses_equipment.json in Resources */,
 				068BEAC4288B28C20060889D /* russia_losses_personnel.json in Resources */,
+				068BEAEA288C27940060889D /* DayInfoCell.xib in Resources */,
 				068BEAAB288B26000060889D /* Assets.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -240,18 +348,30 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				068BEAE2288C260A0060889D /* DetailedViewModel.swift in Sources */,
+				068BEADF288C25FE0060889D /* DetailedViewController.swift in Sources */,
+				068BEAE9288C27940060889D /* DayInfoCell.swift in Sources */,
+				068BEAF3288C395E0060889D /* NetworkingServiceProtocol.swift in Sources */,
 				068BEABB288B26E80060889D /* MainViewController.swift in Sources */,
 				068BEACF288B31300060889D /* MainRouter.swift in Sources */,
 				068BEAD1288B32140060889D /* Navigator.swift in Sources */,
+				068BEB01288C3E1E0060889D /* APIPath.swift in Sources */,
 				068BEAC7288B298D0060889D /* JSONReader.swift in Sources */,
 				068BEAD6288B4DAF0060889D /* ViewController.swift in Sources */,
 				068BEADB288C243F0060889D /* DayLosses.swift in Sources */,
+				068BEB04288C3EA80060889D /* PersonnelRequest.swift in Sources */,
 				068BEAD3288B44A80060889D /* Equipment.swift in Sources */,
 				068BEAA2288B25FD0060889D /* AppDelegate.swift in Sources */,
 				068BEACC288B30DD0060889D /* Router.swift in Sources */,
 				068BEAD9288C1E1E0060889D /* Personnel.swift in Sources */,
+				068BEAE4288C26170060889D /* DetailedRouter.swift in Sources */,
+				068BEAF7288C3AD70060889D /* NetworkingRequest.swift in Sources */,
+				068BEAF9288C3AFD0060889D /* DecodableRequest.swift in Sources */,
 				068BEAA4288B25FD0060889D /* SceneDelegate.swift in Sources */,
 				068BEAC9288B2BC90060889D /* LocalJSONPaths.swift in Sources */,
+				068BEAFC288C3B670060889D /* NetworkingService.swift in Sources */,
+				068BEAED288C2C4B0060889D /* DayInfoModel.swift in Sources */,
+				068BEAFF288C3DDD0060889D /* EquipmentRequest.swift in Sources */,
 				068BEABF288B27080060889D /* MainViewModel.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

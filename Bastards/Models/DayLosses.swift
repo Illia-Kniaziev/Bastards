@@ -10,6 +10,7 @@ import Foundation
 struct DayLosses: Hashable {
     
     let day: Int
+    let date: Date
     let equipment: Equipment
     let personnel: Personnel
     

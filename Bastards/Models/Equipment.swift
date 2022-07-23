@@ -21,8 +21,8 @@ struct Equipment: Decodable, Hashable {
     let navalShip: Int
     let antiAircraftWarfare: Int
     
-    let militaryAuto: Int?
-    let fuelTank: Int?
+//    let militaryAuto: Int?
+//    let fuelTank: Int?
     let vehiclesAndFuelTanks: Int?
     
     let specialEquipment: Int?
@@ -68,10 +68,6 @@ struct Equipment: Decodable, Hashable {
         navalShip = try values.decode(Int.self, forKey: .navalShip)
         antiAircraftWarfare = try values.decode(Int.self, forKey: .antiAircraftWarfare)
         
-        militaryAuto = try? values.decode(Int.self, forKey: .militaryAuto)
-        fuelTank = try? values.decode(Int.self, forKey: .fuelTank)
-        vehiclesAndFuelTanks = try? values.decode(Int.self, forKey: .vehiclesAndFuelTanks)
-        
         specialEquipment = try? values.decode(Int.self, forKey: .specialEquipment)
         cruiseMissiles = try? values.decode(Int.self, forKey: .cruiseMissiles)
         greatestLossesDirection = try? values.decode(String.self, forKey: .greatestLossesDirection)
@@ -84,6 +80,16 @@ struct Equipment: Decodable, Hashable {
             day = intValue
         } else {
             day = 0
+        }
+        
+        //let's generalize interchangable fields
+        if let vehiclesAndFuelTanks = try? values.decode(Int.self, forKey: .vehiclesAndFuelTanks) {
+            self.vehiclesAndFuelTanks = vehiclesAndFuelTanks
+        } else if let militaryAuto = try? values.decode(Int.self, forKey: .militaryAuto),
+                  let fuelTank = try? values.decode(Int.self, forKey: .fuelTank) {
+            self.vehiclesAndFuelTanks = militaryAuto + fuelTank
+        } else {
+            self.vehiclesAndFuelTanks = nil
         }
     }
     

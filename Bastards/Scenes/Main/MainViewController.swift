@@ -42,7 +42,7 @@ final class MainViewController: ViewController {
         emptyMessageLabel.isHidden = true
         
         tableView.dataSource = dataSource
-        tableView.register(UITableViewCell.self, forCellReuseIdentifier: "Cell")
+        tableView.register(UINib(nibName: DayInfoCell.identifier, bundle: nil), forCellReuseIdentifier: DayInfoCell.identifier)
         
         title = "Bastards"
         navigationController?.navigationBar.prefersLargeTitles = true
@@ -79,17 +79,17 @@ final class MainViewController: ViewController {
         
     }
     
+    //MARK: - data source configuration
     private func prepareDataSource() -> UITableViewDiffableDataSource<Int, DayLosses> {
-        return UITableViewDiffableDataSource(tableView: tableView) { tableView, indexPath, losses in
-            let cell = tableView.dequeueReusableCell(withIdentifier: "Cell")
-            var config = UIListContentConfiguration.subtitleCell()
-            config.text = "day #\(losses.day)"
-            if let greatestLosses = losses.equipment.greatestLossesDirection {
-                config.secondaryText = greatestLosses + "🔥"
+        return UITableViewDiffableDataSource(tableView: tableView) { [weak self] tableView, indexPath, losses in
+            let cell = tableView.dequeueReusableCell(withIdentifier: DayInfoCell.identifier) as! DayInfoCell
+            
+            if let config = self?.viewModel.prepareDayInfo(forDay: losses.day) {
+                cell.configure(withModel: config)
+                return cell
             }
-            cell?.contentConfiguration = config
-            cell?.accessoryType = .disclosureIndicator
-            return cell
+            
+            return nil
         }
     }
 
