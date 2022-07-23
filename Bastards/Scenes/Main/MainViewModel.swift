@@ -17,6 +17,12 @@ final class MainViewModel {
         case failed
     }
     
+    enum SortingStrategy: String {
+        case ascending = "Ascending"
+        case descending = "Descending"
+        case topEliminated = "Top eliminated"
+    }
+    
     //MARK: - published properties
     @Published var state: FetchingState = .initial
     @Published var lossesInfo: [DayInfo] = []
@@ -73,6 +79,24 @@ final class MainViewModel {
     func openDetails(forIndex index: Int) {
         let model = lossesInfo[index]
         router.toDetails(usingDayInfo: model)
+    }
+    
+    //MARK: - sorting
+    func sort(usingStrategy strategy: SortingStrategy) {
+        switch strategy {
+        case .ascending:
+            lossesInfo.sort { lhs, rhs in
+                lhs.day < rhs.day
+            }
+        case .descending:
+            lossesInfo.sort { lhs, rhs in
+                lhs.day > rhs.day
+            }
+        case .topEliminated:
+            lossesInfo.sort { lhs, rhs in
+                lhs.eliminated > rhs.eliminated
+            }
+        }
     }
     
     //MARK: - private methods

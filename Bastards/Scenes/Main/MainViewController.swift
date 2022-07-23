@@ -19,6 +19,7 @@ final class MainViewController: ViewController {
     private let viewModel: MainViewModel
     private var subscriptions = Set<AnyCancellable>()
     private lazy var dataSource = prepareDataSource()
+    
     private lazy var milestoneHeaderView: MilestoneView = {
         return Bundle.main.loadNibNamed("MilestoneView", owner: nil)?.first as! MilestoneView
     }()
@@ -50,6 +51,8 @@ final class MainViewController: ViewController {
         
         title = "Bastards"
         navigationController?.navigationBar.prefersLargeTitles = true
+        
+        configureMenu(withSelectedStrategy: .descending)
     }
     
     override func bindViewModel() {
@@ -118,8 +121,33 @@ final class MainViewController: ViewController {
         }
     }
 
+    //MARK: - menu
+    private func configureMenu(withSelectedStrategy strategy: MainViewModel.SortingStrategy) {
+        //For some reason autolayout goes wild when the menu is set :(
+        let actions = generateMenu(withSelectedStrategy: strategy)
+        let menu = UIMenu(title: "Order", image: nil, identifier: nil, options: [], children: actions)
+        navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Order", image: nil, primaryAction: nil, menu: menu)
+    }
+    
+    private func generateMenu(withSelectedStrategy strategy: MainViewModel.SortingStrategy) -> [UIAction] {
+        return [
+            UIAction(title: "Ascending", image: nil, state: strategy == .ascending ? .on : .off) { [weak self] _ in
+                self?.viewModel.sort(usingStrategy: .ascending)
+                self?.configureMenu(withSelectedStrategy: .ascending)
+            },
+            UIAction(title: "Descending", image: nil, state: strategy == .descending ? .on : .off) { [weak self] _ in
+                self?.viewModel.sort(usingStrategy: .descending)
+                self?.configureMenu(withSelectedStrategy: .descending)
+            },
+            UIAction(title: "Top eliminations", image: nil, state: strategy == .topEliminated ? .on : .off) { [weak self] _ in
+                self?.viewModel.sort(usingStrategy: .topEliminated)
+                self?.configureMenu(withSelectedStrategy: .topEliminated)
+            }
+        ]
+    }
 }
 
+//MARK: - UITableViewDelegate
 extension MainViewController: UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
